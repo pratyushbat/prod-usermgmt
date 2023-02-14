@@ -6,7 +6,7 @@ const router = express.Router();
 //  // res.json({name:"Ayanssh"})
 // });
 router.get('/apis/users', (req, res) => {
-  res.json({name:"Ayanssh"})
+  res.json({name:"Pratyush"})
 });
 
 require('../models/users');
