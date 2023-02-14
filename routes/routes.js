@@ -1,36 +1,11 @@
 const express = require('express');
-const mongoose = require('mongoose');
+const userCon = require('../controller/user-controller');
 const router = express.Router();
-// router.get('', (req, res) => {
-//    res.render('index',{title: 'Home page title'})
-//  // res.json({name:"Ayanssh"})
-// });
-router.get('/apis/users', (req, res) => {
-  res.json({name:"Pratyush"})
-});
 
-require('../models/users');
-//var User = require('./../models/user.js');
-const User = mongoose.model("User");
-router.post('/apis/user/register', async (req, res) => {
-  const { name,email,phone } = req.body;
-  try {
-    await User.create({
-      name,
-      email,
-      phone
-    });
-    res.send({status:"oK"})
-  }
-  catch (error) {
-    res.send({ status: "Something went wrong trying" })
-  }
-});
+router.post('/apis/users',userCon.userAll);
 
-router.get('/', (req, res,next) => {
-  res.json({name:"New"})
-});
-
-
-
+router.get("/apis/users/:userId", userCon.user_details);
+router.post('/apis/users/insert',userCon.createUser );
+router.post("/apis/users/update", userCon.user_update);
+router.post("/apis/users/remove", userCon.user_delete);
 module.exports = router;
